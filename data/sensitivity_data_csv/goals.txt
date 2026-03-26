@@ -1,0 +1,19 @@
+event: Queensland price spike at 15:00pm on 7 May 2021
+
+goals:
+compile the following csv:
+for each time interval (30 mins), acquire 
+	- most recent demand profile
+	- most recent price sensitivity
+
+start with just the 15:00 timeslot
+	- acquire prices just before
+	- acquire demand and price sensitivity
+	- calculate associated probs for demand in all states
+	- try to make a determination on probabilities of prices
+
+note - is there a difference between scheduled demand and operational demand
+
+
+-1.28 as a Z score puts 10% in the tail
+that allows us to create a normal distribution around the predicted demand in each state

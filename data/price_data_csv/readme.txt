@@ -1,0 +1,1 @@
+Place CSVs of true prices for the date of interest and the preceding day in the "NEM data" folder, then run python script.

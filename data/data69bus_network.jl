@@ -1,0 +1,907 @@
+struct Network
+    bus
+    bus_gens
+    gen
+    bus_loads
+    bus_arcs
+    branch
+    arcs
+    line_char
+    demand_1_per_agg
+    demand_unbalanced
+    background_load_1
+    background_load_2
+end
+
+function create_network()
+
+    
+    bus = Dict(1=>Dict("vmax"=>1,"vmin"=>1,"vamax"=>0,"vamin"=>0,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    2=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    3=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    4=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    5=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    6=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    7=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    8=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    9=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    10=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    11=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    12=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    13=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    14=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    15=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    16=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    17=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    18=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    19=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    20=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    21=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    22=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    23=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    24=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    25=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    26=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    27=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    28=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    29=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    30=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    31=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    32=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    33=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    34=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    35=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    36=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    37=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    38=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    39=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    40=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    41=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    42=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    43=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    44=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    45=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    46=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    47=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    48=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    49=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    50=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    51=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    52=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    53=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    54=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    55=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    56=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    57=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    58=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    59=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    60=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    61=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    62=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    63=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    64=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    65=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    66=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    67=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    68=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66),
+    69=>Dict("vmax"=>1.05,"vmin"=>0.9,"vamax"=>1.57,"vamin"=>-1.57,"va"=>0,"vm"=>1,"base_kv"=>12.66));
+
+
+    bus_gens = Dict(1=>[1],2=>[],3=>[],4=>[],5=>[],6=>[],7=>[],8=>[],9=>[],10=>[],
+            11=>[],12=>[],13=>[],14=>[],15=>[],16=>[],17=>[],18=>[],19=>[],20=>[],
+            21=>[],22=>[],23=>[],24=>[],25=>[],26=>[],27=>[],28=>[],29=>[],30=>[],
+            31=>[],32=>[],33=>[],34=>[],35=>[],36=>[],37=>[],38=>[],39=>[],40=>[],
+            41=>[],42=>[],43=>[],44=>[],45=>[],46=>[],47=>[],48=>[],49=>[],50=>[],
+            51=>[],52=>[],53=>[],54=>[],55=>[],56=>[],57=>[],58=>[],59=>[],60=>[],
+            61=>[],62=>[],63=>[],64=>[],65=>[],66=>[],67=>[],68=>[],69=>[]);
+
+    gen = Dict(1=>Dict("pg"=>0,"gen_bus"=>1,"pmax"=>6000));
+
+
+    bus_loads = Dict(1=>[],2=>[],3=>[],4=>[],5=>[],6=>[1,2],7=>[3:27],8=>[28:73],
+            9=>[74:92],10=>[93:109],11=>[110:198],12=>[199:287],
+            13=>[288:292],14=>[293:297],15=>[],16=>[298:324],17=>[325:359],
+            18=>[360:394],19=>[],20=>[395],21=>[396:465],22=>[466:468],23=>[],24=>[469:485],
+            25=>[],26=>[486:494],27=>[495:503],28=>[504:519],29=>[520:535],
+            30=>[],31=>[],32=>[],33=>[536:544], 34=>[545:556],35=>[557:560],36=>[561:576],
+            37=>[577:592],38=>[],39=>[593:607],40=>[608:622],41=>[623],42=>[],43=>[624:627],
+            44=>[],45=>[628:651],46=>[652:675],47=>[],48=>[676:724],49=>[725:960],
+            50=>[961:1196],51=>[1197:1221],52=>[1222:1223],53=>[1224:1226],
+            54=>[1227:1242],55=>[1243:1257],56=>[],57=>[],58=>[],59=>[1258:1319],60=>[],61=>[1320:2083],
+            62=>[2084:2103],63=>[],64=>[2104:2242],65=>[2243:2278],66=>[2279:2289],
+            67=>[2290:2300],68=>[2301:2317],69=>[2318:2334]);
+
+
+    bus_arcs = Dict(1=>Dict("to"=>[],"from"=>[(1,1,2)]),
+    2=>Dict("to"=>[(1,1,2)],"from"=>[(2,2,3)]),
+    3=>Dict("to"=>[(2,2,3)],"from"=>[(3,3,4),(27,3,28),(35,3,36)]),
+    4=>Dict("to"=>[(3,3,4)],"from"=>[(4,4,5),(46,4,47)]),
+    5=>Dict("to"=>[(4,4,5)],"from"=>[(5,5,6)]),
+    6=>Dict("to"=>[(5,5,6)],"from"=>[(6,6,7)]),
+    7=>Dict("to"=>[(6,6,7)],"from"=>[(7,7,8)]),
+    8=>Dict("to"=>[(7,7,8)],"from"=>[(8,8,9),(50,8,51)]),
+    9=>Dict("to"=>[(8,8,9)],"from"=>[(9,9,10),(52,9,53)]),
+    10=>Dict("to"=>[(9,9,10)],"from"=>[(10,10,11)]),
+    11=>Dict("to"=>[(10,10,11)],"from"=>[(11,11,12),(65,11,66)]),
+    12=>Dict("to"=>[(11,11,12)],"from"=>[(12,12,13),(67,12,68)]),
+    13=>Dict("to"=>[(12,12,13)],"from"=>[(13,13,14)]),
+    14=>Dict("to"=>[(13,13,14)],"from"=>[(14,14,15)]),
+    15=>Dict("to"=>[(14,14,15)],"from"=>[(15,15,16)]),
+    16=>Dict("to"=>[(15,15,16)],"from"=>[(16,16,17)]),
+    17=>Dict("to"=>[(16,16,17)],"from"=>[(17,17,18)]),
+    18=>Dict("to"=>[(17,17,18)],"from"=>[(18,18,19)]),
+    19=>Dict("to"=>[(18,18,19)],"from"=>[(19,19,20)]),
+    20=>Dict("to"=>[(19,19,20)],"from"=>[(20,20,21)]),
+    21=>Dict("to"=>[(20,20,21)],"from"=>[(21,21,22)]),
+    22=>Dict("to"=>[(21,21,22)],"from"=>[(22,22,23)]),
+    23=>Dict("to"=>[(22,22,23)],"from"=>[(23,23,24)]),
+    24=>Dict("to"=>[(23,23,24)],"from"=>[(24,24,25)]),
+    25=>Dict("to"=>[(24,24,25)],"from"=>[(25,25,26)]),
+    26=>Dict("to"=>[(25,25,26)],"from"=>[(26,26,27)]),
+    27=>Dict("to"=>[(26,26,27)],"from"=>[]),
+    28=>Dict("to"=>[(27,3,28)],"from"=>[(28,28,29)]),
+    29=>Dict("to"=>[(28,28,29)],"from"=>[(29,29,30)]),
+    30=>Dict("to"=>[(29,29,30)],"from"=>[(30,30,31)]),
+    31=>Dict("to"=>[(30,30,31)],"from"=>[(31,31,32)]),
+    32=>Dict("to"=>[(31,31,32)],"from"=>[(32,32,33)]),
+    33=>Dict("to"=>[(32,32,33)],"from"=>[(33,33,34)]),
+    34=>Dict("to"=>[(33,33,34)],"from"=>[(34,34,35)]),
+    35=>Dict("to"=>[(34,34,35)],"from"=>[]),
+    36=>Dict("to"=>[(35,3,36)],"from"=>[(36,36,37)]),
+    37=>Dict("to"=>[(36,36,37)],"from"=>[(37,37,38)]),
+    38=>Dict("to"=>[(37,37,38)],"from"=>[(38,38,39)]),
+    39=>Dict("to"=>[(38,38,39)],"from"=>[(39,39,40)]),
+    40=>Dict("to"=>[(39,39,40)],"from"=>[(40,40,41)]),
+    41=>Dict("to"=>[(40,40,41)],"from"=>[(41,41,42)]),
+    42=>Dict("to"=>[(41,41,42)],"from"=>[(42,42,43)]),
+    43=>Dict("to"=>[(42,42,43)],"from"=>[(43,43,44)]),
+    44=>Dict("to"=>[(43,43,44)],"from"=>[(44,44,45)]),
+    45=>Dict("to"=>[(44,44,45)],"from"=>[(45,45,46)]),
+    46=>Dict("to"=>[(45,45,46)],"from"=>[]),
+    47=>Dict("to"=>[(46,4,47)],"from"=>[(47,47,48)]),
+    48=>Dict("to"=>[(47,47,48)],"from"=>[(48,48,49)]),
+    49=>Dict("to"=>[(48,48,49)],"from"=>[(49,49,50)]),
+    50=>Dict("to"=>[(49,49,50)],"from"=>[]),
+    51=>Dict("to"=>[(50,8,51)],"from"=>[(51,51,52)]),
+    52=>Dict("to"=>[(51,51,52)],"from"=>[]),
+    53=>Dict("to"=>[(52,9,53)],"from"=>[(53,53,54)]),
+    54=>Dict("to"=>[(53,53,54)],"from"=>[(54,54,55)]),
+    55=>Dict("to"=>[(54,54,55)],"from"=>[(55,55,56)]),
+    56=>Dict("to"=>[(55,55,56)],"from"=>[(56,56,57)]),
+    57=>Dict("to"=>[(56,56,57)],"from"=>[(57,57,58)]),
+    58=>Dict("to"=>[(57,57,58)],"from"=>[(58,58,59)]),
+    59=>Dict("to"=>[(58,58,59)],"from"=>[(59,59,60)]),
+    60=>Dict("to"=>[(59,59,60)],"from"=>[(60,60,61)]),
+    61=>Dict("to"=>[(60,60,61)],"from"=>[(61,61,62)]),
+    62=>Dict("to"=>[(61,61,62)],"from"=>[(62,62,63)]),
+    63=>Dict("to"=>[(62,62,63)],"from"=>[(63,63,64)]),
+    64=>Dict("to"=>[(63,63,64)],"from"=>[(64,64,65)]),
+    65=>Dict("to"=>[(64,64,65)],"from"=>[]),
+    66=>Dict("to"=>[(65,11,66)],"from"=>[(66,66,67)]),
+    67=>Dict("to"=>[(66,66,67)],"from"=>[]),
+    68=>Dict("to"=>[(67,12,68)],"from"=>[(68,68,69)]),
+    69=>Dict("to"=>[(68,68,69)],"from"=>[]));
+
+
+    branch = Dict(1=>Dict("br_r"=>0.0005,"br_x"=>0.0012,"f_bus"=>1,"t_bus"=>2),
+    2=>Dict("br_r"=>0.0005,"br_x"=>0.0012,"f_bus"=>2,"t_bus"=>3),
+    3=>Dict("br_r"=>0.0015,"br_x"=>0.0036,"f_bus"=>3,"t_bus"=>4),
+    4=>Dict("br_r"=>0.0251,"br_x"=>0.0294,"f_bus"=>4,"t_bus"=>5),
+    5=>Dict("br_r"=>0.3660,"br_x"=>0.1864,"f_bus"=>5,"t_bus"=>6),
+    6=>Dict("br_r"=>0.3810,"br_x"=>0.1941,"f_bus"=>6,"t_bus"=>7),
+    7=>Dict("br_r"=>0.0922,"br_x"=>0.0470,"f_bus"=>7,"t_bus"=>8),
+    8=>Dict("br_r"=>0.0493,"br_x"=>0.0251,"f_bus"=>8,"t_bus"=>9),
+    9=>Dict("br_r"=>0.8190,"br_x"=>0.2707,"f_bus"=>9,"t_bus"=>10),
+    10=>Dict("br_r"=>0.1872,"br_x"=>0.0619,"f_bus"=>10,"t_bus"=>11),
+    11=>Dict("br_r"=>0.7114,"br_x"=>0.2351,"f_bus"=>11,"t_bus"=>12),
+    12=>Dict("br_r"=>1.0300,"br_x"=>0.0340,"f_bus"=>12,"t_bus"=>13),
+    13=>Dict("br_r"=>1.0440,"br_x"=>0.3450,"f_bus"=>13,"t_bus"=>14),
+    14=>Dict("br_r"=>1.0580,"br_x"=>0.3496,"f_bus"=>14,"t_bus"=>15),
+    15=>Dict("br_r"=>0.1966,"br_x"=>0.065,"f_bus"=>15,"t_bus"=>16),
+    16=>Dict("br_r"=>0.3744,"br_x"=>0.1238,"f_bus"=>16,"t_bus"=>17),
+    17=>Dict("br_r"=>0.0047,"br_x"=>0.0016,"f_bus"=>17,"t_bus"=>18),
+    18=>Dict("br_r"=>0.3276,"br_x"=>0.1083,"f_bus"=>18,"t_bus"=>19),
+    19=>Dict("br_r"=>0.2106,"br_x"=>0.069,"f_bus"=>19,"t_bus"=>20),
+    20=>Dict("br_r"=>0.3416,"br_x"=>0.1129,"f_bus"=>20,"t_bus"=>21),
+    21=>Dict("br_r"=>0.0140,"br_x"=>0.0046,"f_bus"=>21,"t_bus"=>22),
+    22=>Dict("br_r"=>0.1591,"br_x"=>0.0526,"f_bus"=>22,"t_bus"=>23),
+    23=>Dict("br_r"=>0.3463,"br_x"=>0.1145,"f_bus"=>23,"t_bus"=>24),
+    24=>Dict("br_r"=>0.7488,"br_x"=>0.2475,"f_bus"=>24,"t_bus"=>25),
+    25=>Dict("br_r"=>0.3089,"br_x"=>0.1021,"f_bus"=>25,"t_bus"=>26),
+    26=>Dict("br_r"=>0.1732,"br_x"=>0.0572,"f_bus"=>26,"t_bus"=>27),
+    27=>Dict("br_r"=>0.0044,"br_x"=>0.0108,"f_bus"=>3,"t_bus"=>28),
+    28=>Dict("br_r"=>0.0640,"br_x"=>0.1565,"f_bus"=>28,"t_bus"=>29),
+    29=>Dict("br_r"=>0.3978,"br_x"=>0.1315,"f_bus"=>29,"t_bus"=>30),
+    30=>Dict("br_r"=>0.0702,"br_x"=>0.0232,"f_bus"=>30,"t_bus"=>31),
+    31=>Dict("br_r"=>0.3510,"br_x"=>0.1160,"f_bus"=>31,"t_bus"=>32),
+    32=>Dict("br_r"=>0.8390,"br_x"=>0.2816,"f_bus"=>32,"t_bus"=>33),
+    33=>Dict("br_r"=>1.7080,"br_x"=>0.5646,"f_bus"=>33,"t_bus"=>34),
+    34=>Dict("br_r"=>1.4740,"br_x"=>0.4873,"f_bus"=>34,"t_bus"=>35),
+    35=>Dict("br_r"=>0.0044,"br_x"=>0.0108,"f_bus"=>3,"t_bus"=>36),
+    36=>Dict("br_r"=>0.0640,"br_x"=>0.1565,"f_bus"=>36,"t_bus"=>37),
+    37=>Dict("br_r"=>0.1053,"br_x"=>0.1230,"f_bus"=>37,"t_bus"=>38),
+    38=>Dict("br_r"=>0.0304,"br_x"=>0.0355,"f_bus"=>38,"t_bus"=>39),
+    39=>Dict("br_r"=>0.0018,"br_x"=>0.0021,"f_bus"=>39,"t_bus"=>40),
+    40=>Dict("br_r"=>0.7283,"br_x"=>0.8509,"f_bus"=>40,"t_bus"=>41),
+    41=>Dict("br_r"=>0.3100,"br_x"=>0.3623,"f_bus"=>41,"t_bus"=>42),
+    42=>Dict("br_r"=>0.0410,"br_x"=>0.0478,"f_bus"=>42,"t_bus"=>43),
+    43=>Dict("br_r"=>0.0092,"br_x"=>0.0116,"f_bus"=>43,"t_bus"=>44),
+    44=>Dict("br_r"=>0.1089,"br_x"=>0.1373,"f_bus"=>44,"t_bus"=>45),
+    45=>Dict("br_r"=>0.0009,"br_x"=>0.0012,"f_bus"=>45,"t_bus"=>46),
+    46=>Dict("br_r"=>0.0034,"br_x"=>0.0084,"f_bus"=>4,"t_bus"=>47),
+    47=>Dict("br_r"=>0.0851,"br_x"=>0.2083,"f_bus"=>47,"t_bus"=>48),
+    48=>Dict("br_r"=>0.2898,"br_x"=>0.7091,"f_bus"=>48,"t_bus"=>49),
+    49=>Dict("br_r"=>0.0822,"br_x"=>0.2011,"f_bus"=>49,"t_bus"=>50),
+    50=>Dict("br_r"=>0.0928,"br_x"=>0.0473,"f_bus"=>8,"t_bus"=>51),
+    51=>Dict("br_r"=>0.3319,"br_x"=>0.1114,"f_bus"=>51,"t_bus"=>52),
+    52=>Dict("br_r"=>0.1740,"br_x"=>0.0886,"f_bus"=>9,"t_bus"=>53),
+    53=>Dict("br_r"=>0.2030,"br_x"=>0.1034,"f_bus"=>53,"t_bus"=>54),
+    54=>Dict("br_r"=>0.2842,"br_x"=>0.1447,"f_bus"=>54,"t_bus"=>55),
+    55=>Dict("br_r"=>0.2813,"br_x"=>0.1433,"f_bus"=>55,"t_bus"=>56),
+    56=>Dict("br_r"=>1.5900,"br_x"=>0.5337,"f_bus"=>56,"t_bus"=>57),
+    57=>Dict("br_r"=>0.7837,"br_x"=>0.2630,"f_bus"=>57,"t_bus"=>58),
+    58=>Dict("br_r"=>0.3042,"br_x"=>0.1006,"f_bus"=>58,"t_bus"=>59),
+    59=>Dict("br_r"=>0.3861,"br_x"=>0.1172,"f_bus"=>59,"t_bus"=>60),
+    60=>Dict("br_r"=>0.5075,"br_x"=>0.2585,"f_bus"=>60,"t_bus"=>61),
+    61=>Dict("br_r"=>0.0974,"br_x"=>0.0496,"f_bus"=>61,"t_bus"=>62),
+    62=>Dict("br_r"=>0.1450,"br_x"=>0.0738,"f_bus"=>62,"t_bus"=>63),
+    63=>Dict("br_r"=>0.7105,"br_x"=>0.3619,"f_bus"=>63,"t_bus"=>64),
+    64=>Dict("br_r"=>1.0410,"br_x"=>0.5302,"f_bus"=>64,"t_bus"=>65),
+    65=>Dict("br_r"=>0.2012,"br_x"=>0.0611,"f_bus"=>11,"t_bus"=>66),
+    66=>Dict("br_r"=>0.0047,"br_x"=>0.0014,"f_bus"=>66,"t_bus"=>67),
+    67=>Dict("br_r"=>0.7394,"br_x"=>0.2444,"f_bus"=>12,"t_bus"=>68),
+    68=>Dict("br_r"=>0.0047,"br_x"=>0.0016,"f_bus"=>68,"t_bus"=>69),
+    );
+
+
+
+    arcs = [(1,1,2),(2,2,3),(3,3,4),(4,4,5),(5,5,6),(6,6,7),(7,7,8),(8,8,9),(9,9,10),(10,10,11),
+    (11,11,12),(12,12,13),(13,13,14),(14,14,15),(15,15,16),(16,16,17),(17,17,18),(18,18,19),(19,19,20),(20,20,21),
+    (21,21,22),(22,22,23),(23,23,24),(24,24,25),(25,25,26),(26,26,27),(27,3,28),(28,28,29),(29,29,30),(30,30,31),
+    (31,31,32),(32,32,33),(33,33,34),(34,34,35),(35,3,36),(36,36,37),(37,37,38),(38,38,39),(39,39,40),(40,40,41),
+    (41,41,42),(42,42,43),(43,43,44),(44,44,45),(45,45,46),(46,4,47),(47,47,48),(48,48,49),(49,49,50),(50,8,51),
+    (51,51,52),(52,9,53),(53,53,54),(54,54,55),(55,55,56),(56,56,57),(57,57,58),(58,58,59),(59,59,60),(60,60,61),
+    (61,61,62),(62,62,63),(63,63,64),(64,64,65),(65,11,66),(66,66,67),(67,12,68),(68,68,69) ];
+
+    line_char=Dict((1,1,2)=>Dict("br_r"=>0.0005,"br_x"=>0.0012),
+        (2,2,3)=>Dict("br_r"=>0.0005,"br_x"=>0.0012),
+        (3,3,4)=>Dict("br_r"=>0.0015,"br_x"=>0.0036),
+        (4,4,5)=>Dict("br_r"=>0.0251,"br_x"=>0.0294),
+        (5,5,6)=>Dict("br_r"=>0.3660,"br_x"=>0.1864),
+        (6,6,7)=>Dict("br_r"=>0.3810,"br_x"=>0.1941),
+        (7,7,8)=>Dict("br_r"=>0.0922,"br_x"=>0.0470),
+        (8,8,9)=>Dict("br_r"=>0.0493,"br_x"=>0.0251),
+        (9,9,10)=>Dict("br_r"=>0.8190,"br_x"=>0.2707),
+        (10,10,11)=>Dict("br_r"=>0.1872,"br_x"=>0.0619),
+        (11,11,12)=>Dict("br_r"=>0.7114,"br_x"=>0.2351),
+        (12,12,13)=>Dict("br_r"=>1.0300,"br_x"=>0.0340),
+        (13,13,14)=>Dict("br_r"=>1.0440,"br_x"=>0.3450),
+        (14,14,15)=>Dict("br_r"=>1.0580,"br_x"=>0.3496),
+        (15,15,16)=>Dict("br_r"=>0.1966,"br_x"=>0.065),
+        (16,16,17)=>Dict("br_r"=>0.3744,"br_x"=>0.1238),
+        (17,17,18)=>Dict("br_r"=>0.0047,"br_x"=>0.0016),
+        (18,18,19)=>Dict("br_r"=>0.3276,"br_x"=>0.1083),
+        (19,19,20)=>Dict("br_r"=>0.2106,"br_x"=>0.069),
+        (20,20,21)=>Dict("br_r"=>0.3416,"br_x"=>0.1129),
+        (21,21,22)=>Dict("br_r"=>0.0140,"br_x"=>0.0046),
+        (22,22,23)=>Dict("br_r"=>0.1591,"br_x"=>0.0526),
+        (23,23,24)=>Dict("br_r"=>0.3463,"br_x"=>0.1145),
+        (24,24,25)=>Dict("br_r"=>0.7488,"br_x"=>0.2475),
+        (25,25,26)=>Dict("br_r"=>0.3089,"br_x"=>0.1021),
+        (26,26,27)=>Dict("br_r"=>0.1732,"br_x"=>0.0572),
+        (27,3,28)=>Dict("br_r"=>0.0044,"br_x"=>0.0108),
+        (28,28,29)=>Dict("br_r"=>0.0640,"br_x"=>0.1565),
+        (29,29,30)=>Dict("br_r"=>0.3978,"br_x"=>0.1315),
+        (30,30,31)=>Dict("br_r"=>0.0702,"br_x"=>0.0232),
+        (31,31,32)=>Dict("br_r"=>0.3510,"br_x"=>0.1160),
+        (32,32,33)=>Dict("br_r"=>0.8390,"br_x"=>0.2816),
+        (33,33,34)=>Dict("br_r"=>1.7080,"br_x"=>0.5646),
+        (34,34,35)=>Dict("br_r"=>1.4740,"br_x"=>0.4873),
+        (35,3,36)=>Dict("br_r"=>0.0044,"br_x"=>0.0108),
+        (36,36,37)=>Dict("br_r"=>0.0640,"br_x"=>0.1565),
+        (37,37,38)=>Dict("br_r"=>0.1053,"br_x"=>0.1230),
+        (38,38,39)=>Dict("br_r"=>0.0304,"br_x"=>0.0355),
+        (39,39,40)=>Dict("br_r"=>0.0018,"br_x"=>0.0021),
+        (40,40,41)=>Dict("br_r"=>0.7283,"br_x"=>0.8509),
+        (41,41,42)=>Dict("br_r"=>0.3100,"br_x"=>0.3623),
+        (42,42,43)=>Dict("br_r"=>0.0410,"br_x"=>0.0478),
+        (43,43,44)=>Dict("br_r"=>0.0092,"br_x"=>0.0116),
+        (44,44,45)=>Dict("br_r"=>0.1089,"br_x"=>0.1373),
+        (45,45,46)=>Dict("br_r"=>0.0009,"br_x"=>0.0012),
+        (46,4,47)=>Dict("br_r"=>0.0034,"br_x"=>0.0084),
+        (47,47,48)=>Dict("br_r"=>0.0851,"br_x"=>0.2083),
+        (48,48,49)=>Dict("br_r"=>0.2898,"br_x"=>0.7091),
+        (49,49,50)=>Dict("br_r"=>0.0822,"br_x"=>0.2011),
+        (50,8,51)=>Dict("br_r"=>0.0928,"br_x"=>0.0473),
+        (51,51,52)=>Dict("br_r"=>0.3319,"br_x"=>0.1114),
+        (52,9,53)=>Dict("br_r"=>0.1740,"br_x"=>0.0886),
+        (53,53,54)=>Dict("br_r"=>0.2030,"br_x"=>0.1034),
+        (54,54,55)=>Dict("br_r"=>0.2842,"br_x"=>0.1447),
+        (55,55,56)=>Dict("br_r"=>0.2813,"br_x"=>0.1433),
+        (56,56,57)=>Dict("br_r"=>1.5900,"br_x"=>0.5337),
+        (57,57,58)=>Dict("br_r"=>0.7837,"br_x"=>0.2630),
+        (58,58,59)=>Dict("br_r"=>0.3042,"br_x"=>0.1006),
+        (59,59,60)=>Dict("br_r"=>0.3861,"br_x"=>0.1172),
+        (60,60,61)=>Dict("br_r"=>0.5075,"br_x"=>0.2585),
+        (61,61,62)=>Dict("br_r"=>0.0974,"br_x"=>0.0496),
+        (62,62,63)=>Dict("br_r"=>0.1450,"br_x"=>0.0738),
+        (63,63,64)=>Dict("br_r"=>0.7105,"br_x"=>0.3619),
+        (64,64,65)=>Dict("br_r"=>1.0410,"br_x"=>0.5302),
+        (65,11,66)=>Dict("br_r"=>0.2012,"br_x"=>0.0611),
+        (66,66,67)=>Dict("br_r"=>0.0047,"br_x"=>0.0014),
+        (67,12,68)=>Dict("br_r"=>0.7394,"br_x"=>0.2444),
+        (68,68,69)=>Dict("br_r"=>0.0047,"br_x"=>0.0016));
+
+    # [bus][agg]
+    demand_1_per_agg=Dict( 1=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    2=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    3=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    4=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    5=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    6=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    7=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    8=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    9=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    10=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    11=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    12=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    13=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    14=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    15=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    16=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    17=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    18=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    19=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    20=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    21=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    22=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    23=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    24=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    25=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    26=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    27=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    28=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    29=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    30=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    31=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    32=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    33=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    34=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    35=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    36=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    37=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    38=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    39=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    40=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    41=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    42=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    43=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    44=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    45=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    46=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    47=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    48=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    49=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    50=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    51=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    52=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    53=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    54=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    55=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    56=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    57=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    58=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    59=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    60=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    61=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    62=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    63=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    64=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    65=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    66=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    67=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    68=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    69=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3))
+    )
+
+    demand_unbalanced=Dict( 1=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    2=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    3=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    4=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    5=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    6=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    7=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    8=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    9=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    10=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    11=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    12=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    13=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    14=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>3, "agg"=>3)),
+    15=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    16=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    17=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    18=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    19=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    20=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    21=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    22=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    23=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    24=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    25=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    26=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    27=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    28=> Dict(
+    1=>Dict("active"=>3, "agg"=>1),
+    2=>Dict("active"=>0, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    29=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    30=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    31=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    32=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    33=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    34=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    35=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    36=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    37=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    38=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    39=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    40=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    41=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    42=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    43=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    44=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    45=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    46=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    47=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    48=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    49=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    50=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    51=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    52=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    53=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    54=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    55=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    56=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    57=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    58=> Dict(
+    1=>Dict("active"=>1, "agg"=>1),
+    2=>Dict("active"=>1, "agg"=>2),
+    3=>Dict("active"=>1, "agg"=>3)),
+    59=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    60=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    61=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    62=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    63=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    64=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    65=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    66=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    67=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    68=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3)),
+    69=> Dict(
+    1=>Dict("active"=>0, "agg"=>1),
+    2=>Dict("active"=>3, "agg"=>2),
+    3=>Dict("active"=>0, "agg"=>3))
+    )
+
+    # Generate background load data per customer
+    background_load_1 = rand(69)*5
+    background_load_2 = Dict()
+    for i in 1:69
+        background_load_2[i] = Dict()
+        for a in 1:3
+            background_load_2[i][a] = rand(demand_unbalanced[i][a]["active"])*5
+        end
+    end
+
+    network = Network(bus,bus_gens,gen,bus_loads,bus_arcs,branch,arcs,line_char,demand_1_per_agg,demand_unbalanced,background_load_1,background_load_2);
+
+    return network
+end
+
+network = create_network();

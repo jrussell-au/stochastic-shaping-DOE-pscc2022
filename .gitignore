@@ -1,0 +1,15 @@
+# Julia build artifacts
+Manifest.toml
+
+# Editor / OS files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Output files
+*.bin
+saved_data/
+benefit_results_*.csv

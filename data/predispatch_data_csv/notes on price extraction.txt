@@ -1,0 +1,4 @@
+288 entries shifted by 1 - prediction for price at midnight made on the previous day.
+need to fix.
+
+if you wish to run a different day, simply download the PUBLIC_P5MIN_20210614 folder, unzip all using 7-zip, and make necessary date adjustments in python code
