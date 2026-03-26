@@ -51,7 +51,7 @@ Methods suffixed with `_r` include reactive power optimisation.
 ## Installation
 
 ```bash
-cd "Actual Chap 1 Stochastic Shaping"
+cd "Stochastic Bid Shaping for ALlocative Efficiency"
 julia --project=. -e "using Pkg; Pkg.instantiate()"
 ```
 
