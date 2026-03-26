@@ -1,10 +1,22 @@
-# Stochastic Bid Shaping for Aggregator Benefit
+# Stochastic Shaping of Aggregator Energy and Reserve Bids to Ensure Network Security
 
-Research code for comparing network-aware bid-shaping strategies for distributed energy resource (DER) aggregators participating in the Australian National Electricity Market (NEM).
+Research code accompanying the paper:
+
+> J.S. Russell, P. Scott, A. Attarha, "Stochastic shaping of aggregator energy and reserve bids to ensure network security," *Electric Power Systems Research*, vol. 212, 108418, 2022. doi: [10.1016/j.epsr.2022.108418](https://doi.org/10.1016/j.epsr.2022.108418)
+
+## Abstract
+
+Rising market participation of DER through aggregators increases the risk of network constraint violation at the distribution level. Existing approaches to network-secure DER coordination often require centralised resource management/oversight, or involve complex iterative negotiations between prosumers and the distribution service operator (DSO). In response to industry needs for readily-implementable solutions, we propose a straightforward network-secure bid curtailment approach performed by DSOs, allowing for separation of DSO and aggregator roles while factoring aggregator preferences communicated through bids. In extension to previous work, our approach directly maximises expected aggregator benefit in the market by factoring forecast market prices and bid prices into the objective. We mitigate risks of inaccurate market forecasts using a price-probabilistic stochastic program, bringing benefit to within 1% of the perfect information case in our simulations using real data. We demonstrate a 9% improvement in aggregator benefit compared to related approaches, with further gains available through real-reactive power co-optimisation.
 
 ## Overview
 
 This code implements and compares **16 curtailment/bid-shaping methods** for battery aggregators operating on a 69-bus distribution network. The methods range from naive (unconstrained) dispatch to stochastic benefit-maximising optimisation with network power flow constraints.
+
+### Key Contributions
+
+- A variation of nodal operating envelopes that allocates capacity to aggregators based on the market value and bid value of services offered, achieving an **8% improvement** over alternative operating envelope approaches.
+- A **stochastic programming extension** using price probability distributions that brings performance to within **less than 1%** of the perfect information case.
+- Demonstration that **real-reactive power co-optimisation** can bring benefit to near 100% of the ideal unconstrained case.
 
 ### Curtailment Methods Compared
 
@@ -24,10 +36,11 @@ Methods suffixed with `_r` include reactive power optimisation.
 
 ### Network Model
 
-- **69-bus radial distribution network** (IEEE 69-bus test feeder)
-- Branch flow model with voltage and current constraints
+- **69-bus radial distribution network** (IEEE 69-bus test feeder, 12.66 kV)
+- DistFlow branch flow model with voltage (±5%) and current constraints
 - 3 aggregators, each with 10 bid price bands across 12 NEM markets
 - Markets: Energy (raise/lower), Regulation (raise/lower), Contingency FCAS (6-sec, 60-sec, 5-min raise/lower)
+- 1910 customers with 50% prosumer penetration (5 kW / 10 kW inverters)
 
 ## Requirements
 
@@ -59,7 +72,7 @@ Edit [`config.jl`](config.jl) to set simulation parameters:
 julia --project=. stochastic_curtailment_studies.jl
 ```
 
-A full-day simulation (288 time steps × 16 methods) runs for approximately 5-6 minutes per time step.
+A full-day simulation (288 time steps × 16 methods) runs for approximately 5–6 minutes per time step. Simulations use the Ipopt solver; reported results in the paper used an Intel Core i7-9700 3.00 GHz processor with 16 GB RAM.
 
 ## Project Structure
 
@@ -90,9 +103,10 @@ archive/                           # Legacy/unused files
 
 ## Data Sources
 
-- **Network**: IEEE 69-bus test feeder (12.66 kV base)
-- **Prices**: Publicly available NEM predispatch and dispatch data (AEMO)
-- **Load profiles**: Anonymised residential prosumer data (hashed customer IDs)
+- **Network**: IEEE 69-bus test feeder (12.66 kV base) — branch data from Savier & Das (2007)
+- **Prices**: Publicly available NEM predispatch and dispatch data (AEMO), SA1 region, 12 March 2021
+- **Battery bids**: Historical bid data from Hornsdale Power Reserve, Lake Bonney Battery, and Ballarat Battery (12 March 2021)
+- **Load profiles**: Anonymised residential prosumer data from a 30-household Tasmanian trial (Scott et al., 2019)
 - **PV data**: Aggregated rooftop solar generation profiles
 
 ## Output
@@ -105,6 +119,23 @@ Results are stored in the `cs` (curtailment results) and `ns` (naive results) ar
 - FCAS trapezium parameters
 
 Analysis and plotting functions are included in the main script for post-processing.
+
+## Citation
+
+If you use this code in your research, please cite:
+
+```bibtex
+@article{Russell2022,
+  title     = {Stochastic shaping of aggregator energy and reserve bids to ensure network security},
+  author    = {Russell, James Stanley and Scott, Paul and Attarha, Ahmad},
+  journal   = {Electric Power Systems Research},
+  volume    = {212},
+  pages     = {108418},
+  year      = {2022},
+  publisher = {Elsevier},
+  doi       = {10.1016/j.epsr.2022.108418}
+}
+```
 
 ## License
 
